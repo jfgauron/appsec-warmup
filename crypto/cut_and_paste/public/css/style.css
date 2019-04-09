@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+}
+
+.user-information {
+    margin-bottom: 20px;
+    color: white;
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+    min-height: 400px;
+}
+
+.user-information .card-body {
+    background-color: #656d75 !important;
+}
+
+.user-information p strong {
+    color: black;
+}
+
+header.masthead {
+    background: none;
+    background-color: #979fa7;
+}

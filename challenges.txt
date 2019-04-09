@@ -1,0 +1,23 @@
+pwn:
+1) overwrite variable without overwriting canary
+2) set variable to 0xcafebabe
+3) ROP in own buffer
+4) BNC challenge (need to fix negative num leak)
+
+rev:
+1) strings
+2) ltrace
+3) xor
+4) long running check, byte by byte
+
+web:
+1) robots.txt
+2) javascript login
+3) ssrf + /etc/passwd
+4) upload + lfi + unserialize
+
+crypto:
+1) rot13
+2) cut & paste
+3) ecb byte by byte
+4) padding oracle

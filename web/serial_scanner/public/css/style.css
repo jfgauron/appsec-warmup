@@ -1,0 +1,33 @@
+body {
+    height: 100%;
+    background-color: silver;
+}
+
+label {
+    color: black;
+}
+
+.card {
+    margin-top: 20px;
+    min-height: 200px;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.container-fluid {
+    width: 80%;
+}
+
+.scans li {
+    float: left;
+}
+
+hr {
+    border: 2px solid #bd5d38;
+}
+
+.admin-login input, .admin-login button {
+    margin-top: 10px;
+}

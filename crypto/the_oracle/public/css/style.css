@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+}
+
+.user-information {
+    margin-bottom: 20px;
+    color: white;
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+}
+
+.user-information .card-body {
+    background-color: #656d75 !important;
+}
+
+.user-information p strong {
+    color: black;
+}
+
+@font-face {
+    font-family: 'vampire';
+    src: url('/fonts/vamp.woff2') format('woff2'),
+         url('/fonts/vamp.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1 {
+    letter-spacing: 15px;
+    font-family: 'vampire', Arial, sans-serif;
+}
+
+.card-header {
+    text-align: center;
+}
+
+form .alert {
+    margin-top: 8px;
+}
+
+.errorbox {
+    width: 80%;
+    margin: auto;
+    position: relative;
+    bottom: 100px;
+}

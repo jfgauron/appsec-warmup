@@ -1,0 +1,115 @@
+version: "3"
+services:
+
+  proxy:
+    build: ./nginx
+    restart: always
+    ports:
+      - 0.0.0.0:80:80
+    volumes:
+      - ./nginx/.htpasswd:/.htpasswd
+
+  pwn1:
+    build: ./pwn/intro
+    restart: always
+    ports:
+      - 15000:3000
+
+  pwn2:
+    build: ./pwn/cafebabe
+    restart: always
+    ports:
+      - 15001:3000
+
+  pwn3:
+    build: ./pwn/first_rop
+    restart: always
+    ports:
+      - 15002:3000
+
+  pwn4:
+    build: ./pwn/keepass3
+    restart: always
+    ports:
+      - 15003:3000
+
+  crypto2:
+    build: ./crypto/cut_and_paste
+    restart: always
+    ports:
+      - 127.0.0.1:16000:80
+
+  crypto3:
+    build: ./crypto/byte_by_byte
+    restart: always
+    ports:
+      - 127.0.0.1:16001:80
+
+  crypto4:
+    build: ./crypto/the_oracle
+    restart: always
+    ports:
+      - 127.0.0.1:16002:80
+
+  web1:
+    build: ./web/unfinished
+    restart: always
+    ports:
+      - 127.0.0.1:17000:80
+
+  web2:
+    build: ./web/private
+    restart: always
+    ports:
+      - 127.0.0.1:17001:80
+    volumes:
+      - ./web/private/public:/var/www/html
+
+  web3:
+    build: ./web/gallery
+    restart: always
+    ports:
+      - 127.0.0.1:17002:80
+
+  web4:
+    build: ./web/serial_scanner
+    restart: always
+    ports:
+      - 127.0.0.1:17003:80
+      
+  ctfd:
+    build:
+      context: ./CTFd
+    restart: always
+    ports:
+      - "127.0.0.1:18000:8000"
+    environment:
+      - UPLOAD_FOLDER=/var/uploads
+      - DATABASE_URL=mysql+pymysql://root:ctfd@db/ctfd
+      - REDIS_URL=redis://cache:6379
+    volumes:
+      - ./CTFd/.data/CTFd/logs:/var/log/CTFd
+      - ./CTFd/.data/CTFd/uploads:/var/uploads
+      - ./CTFd:/opt/CTFd:ro
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.4
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=ctfd
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=ctfd
+    volumes:
+      - ./CTFd/.data/mysql:/var/lib/mysql
+      - ./config/mysql/init:/docker-entrypoint-initdb.d
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    # This command is required to set important mariadb defaults
+    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
+
+  cache:
+    image: redis:4
+    restart: always
+    volumes:
+    - ./CTFd/.data/redis:/data
